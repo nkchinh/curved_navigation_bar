@@ -138,21 +138,29 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
             right: 0,
             bottom: 0 - (75.0 - widget.height),
             child: SizedBox(
-                height: 100.0,
-                child: Row(
-                    children: widget.items.map((item) {
-                  return NavButton(
-                    onTap: _buttonTap,
-                    position: _pos,
-                    length: _length,
-                    index: widget.items.indexOf(item),
-                    child: item,
-                  );
-                }).toList())),
+              height: 100.0,
+              child: Row(
+                children: buildItems(context),
+              ),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  @protected
+  @mustCallSuper
+  List<Widget> buildItems(BuildContext context) {
+    return widget.items.map((item) {
+      return NavButton(
+        onTap: _buttonTap,
+        position: _pos,
+        length: _length,
+        index: widget.items.indexOf(item),
+        child: item,
+      );
+    }).toList();
   }
 
   void setPage(int index){
